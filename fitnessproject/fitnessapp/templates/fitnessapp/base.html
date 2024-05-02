@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+
+    <script src="{% static 'fitnessapp\setup\tailwindcss.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="{% static 'fitnessapp\setup\Chart.min.js' %}" charset="utf-8" ></script>
+    <link rel="stylesheet" href="{% static 'fitnessapp\setup\Chart.min.css' %}" />
+    <link rel="icon" type="image/jpg" href="{% static 'fitnessapp/setup/images/logo.jpeg' %}">
+
+
+    <style>{% block css %} {% endblock %}</style>
+
+    <title>{% block title %}{% endblock %}</title>
+    
+    <!-- <title>Securix | Dashboard</title> -->
+</head>
+<body class="font-mono">
+
+<!-- Laptop View -->
+<div class="hidden lg:block">
+    <!-- <p>This is the content for laptop view</p> -->
+
+    <!-- Navbar -->
+    <div class="h-16 fixed top-0 w-full bg-white">
+        <div class="grid grid-cols-4 border h-16">
+
+            <a href="/dashboard" class="text-2xl text-blue-700 font-bold pl-4 grid grid-cols-3">
+                <!-- <i class="fa-solid fa-shield pt-1 text-right mr-2"></i> -->
+                <img src="{% static 'fitnessapp\setup\images\logo.jpeg' %}" class="h-14 ml-10" alt="Logo" />
+
+                <div class="col-span-2 text-left my-3">FitnessApp</div>
+            </a>
+
+            <div></div>
+            <div class="col-span-2 h-16">
+                <div class="grid grid-cols-5 h-16">
+
+                    {% if AccounDetails.0.accountPack == "free" %}
+                        <a href="{% url 'buyprime' %}" class="col-span-2">
+                            <div class="text-xl py-3 h-16 font-bold text-center text-yellow-700 hover:text-green-900 hover:bg-green-100 px-2"><i class="fa-solid fa-coins mr-2 "></i>Buy Premium</div>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'buyprime' %}" class="col-span-2">
+                            <div class="text-xl py-3 h-16 font-bold text-center text-yellow-700 hover:text-green-900 hover:bg-green-100 px-2"><i class="fa-solid fa-coins mr-2 "></i>Change Plan</div>
+                        </a>
+                    {% endif %}
+                    
+                    <a href="{% url 'profieview' %}">
+                        <div class="text-xl py-3 h-16 font-bold text-center text-green-700 hover:text-green-900 hover:bg-green-100 px-2">Profile</div>
+                    </a>
+
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'user_logout' %}" class="col-span-2">
+                      <div
+                        class="text-xl py-3 h-16 font-bold text-center text-green-500 hover:text-green-900 hover:bg-green-100"
+                      >
+                        <i class="fa-solid fa-user"></i> {{ user.username }}
+                        <i class="fa-solid fa-right-from-bracket ml-2"></i>
+                      </div>
+                    </a>
+                    {% else %}
+                    <div></div>
+                    <div></div>
+                    <a href="{% url 'user_login' %}">
+                      <div
+                        class="text-xl py-3 h-16 font-bold text-center text-green-500 hover:text-green-900 hover:bg-green-100"
+                      >
+                        <i class="fa-solid fa-user"></i> Login
+                      </div>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Body -->
+    <!-- <div class="mt-18 h">
+        <img src="{# static 'fitnessapp\setup\images\dashHero2.png' #}" class="h-[1020px]" alt="Logo" />
+
+    </div> -->
+
+
+
+    <!-- content -->
+    <div class="mx-20 my-20">{% block content %}{% endblock %}</div>
+
+    {% block js %}{% endblock %}
+
+    <!-- Footer -->
+    <div class="text-center font-bold my-4 text-xl text-indigo-600">
+        <i class="fa-solid fa-copyright mr-2"></i>FitnessApp 2024
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

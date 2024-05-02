@@ -1,0 +1,66 @@
+{% extends 'fitnessapp/base.html' %} {% block title %}Fitness | Dashboard{% endblock %}
+<div>{% block content %} {% load static %}</div>
+    
+
+    <div class="mx-20 my-20">
+
+        <!-- Loss Weight -->
+        <div>
+            <div class="text-center text-2xl font-bold text-yellow-600 my-4 border p-2 rounded-md bg-yellow-100">Losing Weight : Diet</div>
+            
+            <!-- Types : cards -->
+            <div class="grid grid-cols-4 gap-4">
+                
+            {% for item in losingweightdiet %}
+                <!-- <a href="{{ item.link }}" > -->
+                    <div class="border p-4 rounded-md shadow-md h-full">                
+                        <!-- <img src="{% static item.image %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" /> -->
+                        <div class="text-center font-bold text-xl mt-5">{{ item.meal }}</div>
+                        <div class="text-justify mt-4">
+                            <div>
+                                {% for food in item.foods %}
+                                    <div class="border p-2 bg-yellow-100 text-sm my-2 rounded-md">-> {{ food }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                <!-- </a> -->
+            {% endfor %}
+            
+
+            </div>
+        </div>
+
+        <!-- Gain Weight -->
+        <div>
+            <div class="text-center text-2xl font-bold text-green-600 my-4 border p-2 rounded-md bg-green-100">Gain Weight : Diet</div>
+            
+            <!-- Types : cards -->
+            <div class="grid grid-cols-4 gap-4">
+                
+            {% for item in gainingweighdiet %}
+                <!-- <a href="{{ item.link }}" > -->
+                    <div class="border p-4 rounded-md shadow-md h-full">                
+                        <!-- <img src="{% static item.image %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" /> -->
+                        <div class="text-center font-bold text-xl mt-5">{{ item.meal }}</div>
+                        <div class="text-justify mt-4">
+                            <div>
+                                {% for food in item.foods %}
+                                    <div class="border p-2 bg-green-100 text-sm my-2 rounded-md">-> {{ food }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                <!-- </a> -->
+            {% endfor %}
+            
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    
+{% endblock %}

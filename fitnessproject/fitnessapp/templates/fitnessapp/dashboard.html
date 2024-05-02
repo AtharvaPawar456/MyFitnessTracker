@@ -1,0 +1,102 @@
+{% extends 'fitnessapp/base.html' %} {% block title %}Fitness | Dashboard{% endblock %}
+<div>{% block content %} {% load static %}</div>
+    
+    <!-- Body -->
+    <!-- <div class="mt-18 h">
+        <img src="{# static 'fitnessapp\setup\images\dashHero2.png' #}" class="h-[1020px]" alt="Logo" />
+
+    </div> -->
+
+    <div class="mx-20 my-20">
+        <div class="grid grid-cols-4 gap-4">
+            {% if AccounDetails.0.accountPack == "prime" %}
+                <a href="{% url 'dailytracking' %}">
+                    <div class="border p-4 rounded-md hover:bg-yellow-200 shadow-md">                
+                        <img src="{% static 'fitnessapp\setup\images\tracking.jpeg' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                        <div class="text-center font-bold text-xl mt-5"><i class="fa-solid fa-thumbtack mr-2 text-yellow-700"></i>Daily Tracking</div>
+                    </div>
+                </a>
+                
+                
+                <a href="{% url 'seetransformation' %}">
+                    <div class="border p-4 rounded-md hover:bg-yellow-200 shadow-md">                
+                        <img src="{% static 'fitnessapp\setup\images\transformation.webp' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                        <div class="text-center font-bold text-xl mt-5"><i class="fa-solid fa-utensils mr-2 text-yellow-700"></i>See Transformation</div>
+                    </div>
+                </a>
+
+                <a href="{% url 'recdiet' %}">
+                    <div class="border p-4 rounded-md hover:bg-yellow-200 shadow-md">                
+                        <img src="{% static 'fitnessapp\setup\images\diet-plan.jpeg' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                        <div class="text-center font-bold text-xl mt-5"><i class="fa-solid fa-utensils mr-2 text-yellow-700"></i>Recommended Diet</div>
+                    </div>
+                </a>
+            {% endif %}
+
+            
+            
+            <a href="{% url 'exercises' %}">
+                <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                    <img src="{% static 'fitnessapp\setup\images\exercise.jpeg' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5"><i class="fa-solid fa-dumbbell mr-2 text-red-600"></i>Exercises</div>
+                </div>
+            </a>
+
+            
+            <a href="{% url 'gymnearme' %}" >
+            <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                <img src="{% static 'fitnessapp\setup\images\gymgps.png' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5">
+                        <i class="fa-solid fa-map-location-dot mr-2 text-indigo-600"></i>GYM Near Me
+                    </div>
+                </div>
+            </a>
+
+
+            <a href="{% url 'yoga' %}">
+            <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                <img src="{% static 'fitnessapp\setup\images\yoga.jpeg' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5">
+                        <i class="fa-solid fa-child-reaching mr-2 text-green-600"></i>Yoga
+                    </div>
+                </div>
+            </a>
+
+            
+            <a href="{% url 'bmical' %}">
+            <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                <img src="{% static 'fitnessapp\setup\images\bmi.png' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5">
+                        <i class="fa-solid fa-calculator mr-2 text-indigo-600"></i>BMI
+                    </div>
+                </div>
+            </a>
+
+            <a href="{% url 'bfpcal' %}">
+            <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                <img src="{% static 'fitnessapp\setup\images\bfp.jpeg' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5">
+                        <i class="fa-solid fa-calculator mr-2 text-indigo-600"></i>BFP
+                    </div>
+                </div>
+            </a>
+
+            <a href="{% url 'bmrcal' %}">
+            <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                <img src="{% static 'fitnessapp\setup\images\bmr.png' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5">
+                        <i class="fa-solid fa-calculator mr-2 text-indigo-600"></i>BMR
+                    </div>
+                </div>
+            </a>
+
+
+
+        </div>
+    </div>
+
+</a>
+
+
+
+{% endblock %}

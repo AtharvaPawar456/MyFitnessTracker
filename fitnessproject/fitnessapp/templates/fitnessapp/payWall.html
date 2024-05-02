@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+
+    <script src="{% static 'fitnessapp\setup\tailwindcss.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="{% static 'fitnessapp\setup\Chart.min.js' %}" charset="utf-8" ></script>
+    <link rel="stylesheet" href="{% static 'fitnessapp\setup\Chart.min.css' %}" />
+    <link rel="icon" type="image/jpg" href="{% static 'fitnessapp/setup/images/stripe-logo.png' %}">
+
+
+    <title>Stripe | Dashboard</title>
+</head>
+<body class="font-mono">
+
+<!-- Laptop View -->
+<div class="hidden lg:block">
+
+    <div class="text-center text-2xl text-indigo-700 mt-10 font-bold">Stripe Payment Wall 
+        <div class="font-bold p-1 bg-yellow-300 rounded-md inline text-yellow-700 px-4">Test Mode</div>
+    </div>
+    <!-- Body -->
+    <div class="grid grid-cols-2 gap-10 mx-14 my-10">
+        <img src="{% static 'fitnessapp\setup\images\StripeCards.png' %}" class="" alt="Logo" />
+        <div class="border p-14 rounded-md shadow-xl border-2">
+        <form method="post" action="{% url 'payWall' %}">
+            {% csrf_token %}
+
+
+            <div class="mb-4 text-xl text-gray-500 text-center">Pay with card</div>
+            
+            <div class="border rounded-md p-1 bg-yellow-100 text-yellow-800 text-center mb-4"><div>Subscribe to FitnessApp Prime Plan (365 Days)</div></div>
+            
+            <div class="mb-4 text-2xl font-bold text-gray-500">Payment Details</div>
+
+            <div class="mb-5">
+                <input type="number" id="cardnumber" name="cardnumber" pattern="[0-9]{16}" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="CARD NUMBER" required>
+            </div>
+            
+            <div class="mb-5">
+                <input type="text" id="cardholdername" name="cardholdername" pattern="[A-Za-z\s]+" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="CARDHOLDER NAME" required>
+            </div>
+            
+            <div class="mb-5 flex">
+                <input type="number" id="date1" name="datemonth" min="1" max="12" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-40 mr-2"
+                    placeholder="MM" required>
+                <input type="number" id="dateyear" name="dateyear" min="2022" max="2099" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-28 mr-2"
+                    placeholder="YYYY" required>
+                <input type="number" id="cvvdata" name="cvvdata" pattern="[0-9]{3}" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-30"
+                    placeholder="CVV" required>
+                <i class="fa-solid fa-credit-card ml-2 text-4xl mt-1"></i>
+            </div>
+            
+            <button type="submit" 
+                class="text-white text-xl bg-indigo-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center">CONFIRM AND PAY Rs. {{ amount }}
+            </button>
+            
+            <a href="{% url 'dashboard' %}" 
+                class="text-black font-bold text-xl border border-2 border-gray-400 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full sm:w-auto px-10 py-2.5 text-center">
+                CANCEL
+            </a>
+            
+            
+            
+
+        </form>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="text-center font-bold my-4 text-sm text-gray-400">
+        Powered by Stripe | 
+        <a href="https://stripe.com/in/legal/consumer" class="inline">Terms</a> 
+        <a href="https://stripe.com/in/privacy" class="inline">Privacy</a>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

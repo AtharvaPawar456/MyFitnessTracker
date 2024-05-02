@@ -1,0 +1,88 @@
+{% extends 'fitnessapp/base.html' %}
+{% block title %}Fitness . BMI{% endblock %}
+
+{% block content %}
+<div class="h-[480px]">
+    <div class="text-center text-2xl font-bold text-indigo-600 mb-4">BMI Calculator</div>
+
+    <div class="grid grid-cols-2 gap-2">
+
+        <!-- Cal -->
+        <div class="mx-auto border w-[520px] p-10 rounded-md shadow-xl border-4 border-gray-600">
+            <form id="bmiForm">
+                {% csrf_token %}
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="weight">Weight (kg):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="73" type="number" id="weight" name="weight" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="height">Height (cm):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="173" type="number" id="height" name="height" required>
+                </div>
+                <button type="button" onclick="calculateBMI()" class="border p-2 rounded-md mx-[150px] bg-indigo-200 hover:bg-indigo-400">Calculate BMI</button>
+            </form>
+            <div id="bmiResult" class="mt-4 "></div>
+        </div>
+
+        <!-- Table -->
+        <div class="px-[150px]">
+            <table class="border-collapse border border-gray-400">
+                <thead>
+                  <tr class="bg-gray-200">
+                    <th class="border border-gray-400 p-2">Category</th>
+                    <th class="border border-gray-400 p-2">BMI range - kg/m<sup>2</sup></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Severe Thinness</td>
+                    <td class="border border-gray-400 p-2">&lt; 16</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Moderate Thinness</td>
+                    <td class="border border-gray-400 p-2">16 - 17</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Mild Thinness</td>
+                    <td class="border border-gray-400 p-2">17 - 18.5</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Normal</td>
+                    <td class="border border-gray-400 p-2">18.5 - 25</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Overweight</td>
+                    <td class="border border-gray-400 p-2">25 - 30</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Obese Class I</td>
+                    <td class="border border-gray-400 p-2">30 - 35</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Obese Class II</td>
+                    <td class="border border-gray-400 p-2">35 - 40</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Obese Class III</td>
+                    <td class="border border-gray-400 p-2">&gt; 40</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+        </div>
+    </div>
+        
+        <script>
+            function calculateBMI() {
+                var weight = document.getElementById('weight').value;
+                var height = document.getElementById('height').value / 100; // converting height to meters
+                var bmi = weight / (height * height);
+                
+                var bmiResultDiv = document.getElementById('bmiResult');
+                bmiResultDiv.innerHTML = 'Your BMI: <span class="text-xl">' + bmi.toFixed(2) + '</span>';
+                bmiResultDiv.classList.add('text-center', 'p-2', 'border', 'rounded-md', 'bg-yellow-300');
+            }
+        </script>
+</div>
+
+{% endblock %}

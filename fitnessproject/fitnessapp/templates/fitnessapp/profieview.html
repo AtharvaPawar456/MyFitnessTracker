@@ -1,0 +1,66 @@
+{% extends 'fitnessapp/base.html' %} {% block title %}Fitness . Profile{% endblock %}
+<div>{% block content %} {% load static %}</div>
+    
+
+<div class="mx-20 my-20">
+
+    <div class="text-center text-4xl font-bold text-indigo-600 mb-4">Profile Details</div>
+
+<div class="grid grid-cols-2 gap-4">
+
+    <div>
+        <img src="{% static img_path %}" class="rounded-md h-[560px] shadow-2xl mx-auto" alt="Logo" />
+    </div>
+
+    <div class="border rounded-md shadow-xl p-20">
+        <div class="p-2 border rounded-md  my-4">
+            <b>User Name</b> : {{ AccounDetails.0.user_name }}
+        </div>
+        <div class="p-2 border rounded-md  my-4">
+            <b>Email ID</b> : {{ AccounDetails.0.emailid }}
+        </div>
+        <div class="p-2 border rounded-md  my-4">
+            <b>Phone Number</b> : +91 {{ AccounDetails.0.phoneno }}
+        </div>
+        <div class="p-2 border rounded-md  my-4">
+            <b>Age</b> : {{ AccounDetails.0.age }}
+        </div>
+        <div class="p-2 border rounded-md  my-4 py-4">
+            <b>Plan Taken</b> : <p class="p-2 border rounded bg-green-300 inline">{{ AccounDetails.0.accountPack | title }}</p>
+        </div>
+        
+        <div class="p-2 border rounded-md  my-4 py-4">
+            <b>Points</b> : <p class="p-2 border rounded-full px-4 bg-yellow-300 inline">{{ AccounDetails.0.points }}</p>
+        </div>
+        
+    </div>
+</div>
+
+
+    <div class="mb-4 mt-20">
+        <div class="text-center text-4xl font-bold text-indigo-600 mb-4">Payments History</div>
+
+        
+        <div>
+            {% for item in PayDetails %}
+                <div class="border p-4 rounded-md shadow-md grid grid-cols-5 gap-4">                
+                    <div class="text-center font-bold text-xl">Plan: <b class="text-yellow-700">{{ item.plan | title }}</b></div>
+                    <div class="text-justify ">Amount: 
+                        <div class="font-bold p-1 bg-green-300 rounded-md inline text-green-900 px-4">Rs. {{ item.amount }}</div>
+                    </div>
+                    <div class="text-justify ">Status: 
+                        <div class="font-bold p-1 bg-yellow-300 rounded-md inline text-yellow-700 px-4">{{ item.status }}</div>
+                    </div>
+                    <div class="text-justify"><b>PayDate: </b>{{ item.timestamp }}</div>
+                    <div class="text-justify"><b>End Date: </b>{{ enddate.0 }}</div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+</div>
+    
+{% endblock %}

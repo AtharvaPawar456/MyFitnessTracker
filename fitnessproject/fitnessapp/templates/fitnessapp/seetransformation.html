@@ -1,0 +1,40 @@
+{% extends 'fitnessapp/base.html' %} {% block title %}Fitness . Exercises{% endblock %}
+<div>{% block content %} {% load static %}</div>
+    
+    <div class="text-center text-4xl font-bold text-indigo-600 mb-4">Your Transformation Timeline</div>
+
+
+    <div class="mx-20 my-20">
+
+        <!-- transformation -->
+        <div>
+            <div class="text-center text-2xl font-bold text-green-600 mb-4 border p-2 rounded-md bg-green-100">Exercises for Arms</div>
+            
+            <!-- Types : cards -->
+            <div class="grid grid-cols-4 gap-4">
+                {% for item in trackDetails %}
+
+                    <div class="border p-4 rounded-md  shadow-md h-full">                
+                        <img src="{% static item.imgPath %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center text-md mt-5 p-1 border rounded-md bg-gray-200">Height: {{ item.myheight }}</div>
+                            <div class="text-center text-md mt-5 p-1 border rounded-md bg-gray-200">Weight: {{ item.myweigth }}</div>
+                        </div>
+                        <div class="mt-4 text-center">Calorie (in kcal) : {{ item.toDayCalories }} </div>
+                        <div class="font-bold text-xl mt-5 p-2 border rounded-md bg-yellow-200 text-center">
+                            Timestamp
+                            <div class="">{{ item.timestamp }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    
+{% endblock %}

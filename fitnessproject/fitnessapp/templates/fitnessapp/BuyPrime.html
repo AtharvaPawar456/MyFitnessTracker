@@ -1,0 +1,89 @@
+{% extends 'fitnessapp/base.html' %} {% block title %}Fitness . Buy Prime{% endblock %}
+<div>{% block content %} {% load static %}</div>
+    
+    <div class="text-center text-2xl font-bold text-indigo-600 mb-4">Plans</div>
+
+
+    <div class="mx-20 my-10">
+
+
+        <div class="grid grid-cols-2 gap-4">
+
+            {% if AccounDetails.0.accountPack == "free" %}
+
+            
+                <div class="border p-4 rounded-md  shadow-md h-full bg-gray-100 select-none">                
+                    <div class="text-center font-bold text-4xl mt-5 text-green-800"><i class="fa-solid fa-money-bill-wave mr-2"></i>{{ freeplan.title }}</div>
+                    <div class="grid grid-cols-2 gap-2 mt-10">
+                        <div class="text-center font-bold text-xl mt-5 text-green-800">Time Interval: {{ freeplan.time }}</div>
+                        <div class="text-center font-bold text-xl mt-5 text-green-800">Amount : Rs. {{ freeplan.amount }}</div>
+                    </div>
+                    <div class="text-justify mt-4">
+                        <div class="text-center text-2xl p-2 border rounded-md mb-4 bg- font-bold bg-green-300">Services:</div>
+                        {% for item in freeplan.service %}
+                            <div class="ml-4">-> {{ item }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            <a href="{% url 'payWall' %}" class="hover:bg-yellow-500 bg-yellow-100 rounded-md">
+                <div class="border p-4 rounded-md  shadow-md h-full ">                
+                    <div class="text-center font-bold text-4xl mt-5 text-yellow-800"><i class="fa-solid fa-crown mr-2"></i>{{ primeplan.title }}</div>
+                    <div class="grid grid-cols-2 gap-2 mt-10">
+                        <div class="text-center font-bold text-xl mt-5 text-yellow-800">Time Interval: {{ primeplan.time }}</div>
+                        <div class="text-center font-bold text-xl mt-5 text-yellow-800">Amount : Rs. {{ primeplan.amount }}</div>
+                    </div>
+                    <div class="text-justify mt-4">
+                        <div class="text-center text-2xl p-2 border rounded-md mb-4 bg- font-bold bg-yellow-300">Services:</div>
+                        {% for item in freeplan.service %}
+                            <div class="ml-4">-> {{ item }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+
+            {% else %}
+
+            <a href="/update_account_plan/?plan=free" class="hover:bg-green-200 rounded-md">
+                <div class="border p-4 rounded-md  shadow-md h-full">                
+                    <div class="text-center font-bold text-4xl mt-5 text-green-800"><i class="fa-solid fa-money-bill-wave mr-2"></i>{{ freeplan.title }}</div>
+                    
+                    <div class="grid grid-cols-2 gap-2 mt-10">
+                        <div class="text-center font-bold text-xl mt-5 text-green-800">Time Interval: {{ freeplan.time }}</div>
+                        <div class="text-center font-bold text-xl mt-5 text-green-800">Amount : Rs. {{ freeplan.amount }}</div>
+                    </div>
+                    <div class="text-justify mt-4">
+                        <div class="text-center text-2xl p-2 border rounded-md mb-4 bg- font-bold bg-green-300">Services:</div>
+                        {% for item in freeplan.service %}
+                            <div class="ml-4">-> {{ item }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+
+                <div class="border p-4 rounded-md  shadow-md h-full bg-gray-100 select-none">                
+                    <div class="text-center font-bold text-4xl mt-5 text-yellow-800"><i class="fa-solid fa-crown mr-2"></i>{{ primeplan.title }}</div>
+                    
+                    <div class="grid grid-cols-2 gap-2 mt-10">
+                        <div class="text-center font-bold text-xl mt-5 text-yellow-800">Time Interval: {{ primeplan.time }}</div>
+                        <div class="text-center font-bold text-xl mt-5 text-yellow-800">Amount : Rs. {{ primeplan.amount }}</div>
+                    </div>
+                    <div class="text-justify mt-4">
+                        <div class="text-center text-2xl p-2 border rounded-md mb-4 bg- font-bold bg-yellow-300">Services:</div>
+                        {% for item in freeplan.service %}
+                            <div class="ml-4">-> {{ item }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% endif %}
+
+            
+
+
+
+        </div>
+
+    </div>
+    
+{% endblock %}

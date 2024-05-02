@@ -1,0 +1,111 @@
+{% extends 'fitnessapp/base.html' %}
+{% block title %}Fitness . BMR{% endblock %}
+
+{% block content %}
+<div class="h-[580px]">
+    <div class="text-center text-2xl font-bold text-indigo-600 mb-4">BMR Calculator</div>
+
+    <div class="grid grid-cols-2 gap-2">
+
+        <!-- Cal -->
+        <div class="mx-auto border w-[520px] p-10 rounded-md shadow-xl border-4 border-gray-600">
+            <form id="bmrForm">
+                {% csrf_token %}
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" class="border p-2 rounded-md w-8/12 text-gray-800">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="age">Age:</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Age" type="number" id="age" name="age" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="weight">Weight (kg):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Weight" type="number" id="weight" name="weight" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="height">Height (cm):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Height" type="number" id="height" name="height" required>
+                </div>
+                <button type="button" onclick="calculateBMR()" class="border p-2 rounded-md mx-[150px] bg-indigo-200 hover:bg-indigo-400">Calculate BMR</button>
+            </form>
+            <div id="bmrResult" class="mt-4 "></div>
+        </div>
+
+        <!-- Table -->
+        <div class="px-[150px]">
+            <table class="border-collapse border border-gray-400">
+                <thead>
+                  <tr class="bg-gray-200">
+                    <th class="border border-gray-400 p-2">Category</th>
+                    <th class="border border-gray-400 p-2">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Sedentary</td>
+                    <td class="border border-gray-400 p-2">Little or no exercise</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Lightly Active</td>
+                    <td class="border border-gray-400 p-2">Light exercise/sports 1-3 days a week</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Moderately Active</td>
+                    <td class="border border-gray-400 p-2">Moderate exercise/sports 3-5 days a week</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Very Active</td>
+                    <td class="border border-gray-400 p-2">Hard exercise/sports 6-7 days a week</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-400 p-2">Extra Active</td>
+                    <td class="border border-gray-400 p-2">Very hard exercise/sports & physical job</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+        </div>
+    </div>
+        
+    <script>
+        function calculateBMR() {
+            var gender = document.getElementById('gender').value;
+            var age = parseInt(document.getElementById('age').value);
+            var weight = parseFloat(document.getElementById('weight').value);
+            var height = parseFloat(document.getElementById('height').value);
+            
+            // Calculate BMR using Harris-Benedict Equation
+            var bmr;
+            if (gender === 'male') {
+                bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else if (gender === 'female') {
+                bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+            
+            // Determine category based on BMR value
+            var category;
+            if (bmr < 1600) {
+                category = 'Sedentary';
+            } else if (bmr >= 1600 && bmr < 2000) {
+                category = 'Lightly Active';
+            } else if (bmr >= 2000 && bmr < 2400) {
+                category = 'Moderately Active';
+            } else if (bmr >= 2400 && bmr < 2800) {
+                category = 'Very Active';
+            } else {
+                category = 'Extra Active';
+            }
+            
+            var bmrResultDiv = document.getElementById('bmrResult');
+            bmrResultDiv.innerHTML = 'Your BMR: <span class="text-xl">' + bmr.toFixed(2) + ' calories/day</span><br>Category: <span class="text-xl">' + category + '</span>';
+            bmrResultDiv.classList.add('text-center', 'p-2', 'border', 'rounded-md', 'bg-yellow-300');
+        }
+    </script>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'fitnessapp/base.html' %}
+{% block title %}Fitness . BFP{% endblock %}
+
+{% block content %}
+<div class="h-[700px]">
+    <div class="text-center text-2xl font-bold text-indigo-600 mb-4">BFP Calculator</div>
+
+    <div class="grid grid-cols-2 gap-2">
+
+        <!-- Cal -->
+        <div class="mx-auto border w-[520px] p-10 rounded-md shadow-xl border-4 border-gray-600">
+            <form id="bfpForm">
+                {% csrf_token %}
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" class="border p-2 rounded-md w-8/12 text-gray-800" onchange="shHip(this.value)">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div id="hip-form" class="mb-4 border p-2 rounded-md">
+                    <label for="hip">Hip (cm):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Hip" type="number" id="hip" name="hip" value="90" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="age">Age:</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Age" type="number" id="age" name="age" value="30" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="weight">Weight (kg):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Weight" type="number" id="weight" name="weight" value="70" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="height">Height (cm):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Height" type="number" id="height" name="height" value="170" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="neck">Neck (cm):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Neck" type="number" id="neck" name="neck" value="35" required>
+                </div>
+                <div class="mb-4 border p-2 rounded-md">
+                    <label for="waist">Waist (cm):</label>
+                    <input class="border p-2 rounded-md w-8/12 text-gray-800" placeholder="Waist" type="number" id="waist" name="waist" value="80" required>
+                </div>
+                <button type="button" id="submit-m" onclick="getbfivalue1()" class="border p-2 rounded-md mx-[150px] bg-indigo-200 hover:bg-indigo-400">Calculate BFP (Male)</button>
+                <button type="button" id="submit-f" onclick="getbfivalue2()" class="border p-2 rounded-md mx-[150px] bg-indigo-200 hover:bg-indigo-400" style="display: none;">Calculate BFP (Female)</button>
+            </form>
+            <div id="bfpResult" class="mt-4"></div>
+        </div>
+
+        <!-- Table -->
+        <div class="px-[150px]">
+            <table class="border-collapse border border-gray-400">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-400 p-2">Description</th>
+                        <th class="border border-gray-400 p-2">Women</th>
+                        <th class="border border-gray-400 p-2">Men</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-400 p-2">Essential fat</td>
+                        <td class="border border-gray-400 p-2">10-13%</td>
+                        <td class="border border-gray-400 p-2">2-5%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 p-2">Athletes</td>
+                        <td class="border border-gray-400 p-2">14-20%</td>
+                        <td class="border border-gray-400 p-2">6-13%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 p-2">Fitness</td>
+                        <td class="border border-gray-400 p-2">21-24%</td>
+                        <td class="border border-gray-400 p-2">14-17%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 p-2">Average</td>
+                        <td class="border border-gray-400 p-2">25-31%</td>
+                        <td class="border border-gray-400 p-2">14-24%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 p-2">Obese</td>
+                        <td class="border border-gray-400 p-2">32+%</td>
+                        <td class="border border-gray-400 p-2">25+%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function shHip(shGenger) {
+            if (shGenger == 'm') {
+                document.getElementById("hip-form").style.display = 'none';
+                document.getElementById("submit-f").style.display = 'none';
+                document.getElementById("submit-m").style.display = 'block';
+            } else {
+                document.getElementById("hip-form").style.display = 'block';
+                document.getElementById("submit-m").style.display = 'none';
+                document.getElementById("submit-f").style.display = 'block';
+            }
+        }
+
+        // For Male
+        function getbfivalue1() {
+            var waist = parseFloat(document.getElementById('waist').value);
+            var neck = parseFloat(document.getElementById('neck').value);
+            var height = parseFloat(document.getElementById('height').value);
+
+            var wn = Math.log10(waist - neck);
+            var h = Math.log10(height);
+            var den = (1.0324 - (0.19077 * wn) + (0.15456 * h));
+            var num_den = (495 / den);
+            var newbfivalue = num_den - 450;
+            newbfivalue = parseFloat(newbfivalue).toFixed(2);
+            document.getElementById('bfpResult').innerHTML = 'Your BFP: ' + newbfivalue + '%';
+        }
+
+        // For Female
+        function getbfivalue2() {
+            var waist = parseFloat(document.getElementById('waist').value);
+            var neck = parseFloat(document.getElementById('neck').value);
+            var height = parseFloat(document.getElementById('height').value);
+            var hip = parseFloat(document.getElementById('hip').value);
+
+            var w = Math.log10(waist);
+            var n = Math.log10(neck);
+            var h = Math.log10(height);
+            var hp = Math.log10(hip);
+
+            var whpn = (w + hp - n);
+            var den = (1.29579 - (0.35004 * whpn) + (0.22100 * h));
+            var num_den = (495 / den);
+            var newbfivalue = (num_den - 450) / den;
+            newbfivalue = parseFloat(newbfivalue).toFixed(2);
+            document.getElementById('bfpResult').innerHTML = 'Your BFP: ' + newbfivalue + '%';
+        }
+    </script>
+</div>
+{% endblock %}
