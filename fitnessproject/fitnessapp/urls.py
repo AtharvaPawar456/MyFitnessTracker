@@ -23,6 +23,7 @@ urlpatterns = [
     path("yoga/", views.yoga, name="yoga"),
     path("dailytracking/", views.dailytracking, name="dailytracking"),
     path("seetransformation/", views.seetransformation, name="seetransformation"),
+    path("recproducts/", views.recproducts, name="recproducts"),
 
 
     # path("repolinkupload/", views.repolinkupload, name="repolinkupload"),

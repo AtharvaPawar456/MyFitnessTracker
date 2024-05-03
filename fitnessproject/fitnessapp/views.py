@@ -47,6 +47,63 @@ def bmrcal(request):
 def gymnearme(request):
     return render(request,'fitnessapp/GYMNearMe.html')
 
+def recproducts(request):
+    recData = [
+    {
+        "product_name": "Fashnex Resistance Bands Set for Exercise, Stretching and Workout Toning Tube Kit with Foam Handles, Door Anchor, Ankle Strap and Carrying Bag for Men, Women",
+        "image": "fitnessapp/setup/images/recProd/p1img.jpg",
+        "product_price": "Rs. 659/-",
+        "product_link": "https://amzn.in/d/cxUyyj8",
+        "product_description": "Deal of the day for Prime Members: Fashnex Resistance Bands Set for Exercise, Stretching and Workout Toning Tube Kit with Foam Handles, Door Anchor, Ankle Strap and Carrying Bag for Men, Women"
+    },
+    {
+        "product_name": "HealthSense Weight Machine for Kitchen, Kitchen Food Weighing Scale for Health, Fitness, Home Baking & Cooking with Bright LCD, Touch Button, Tare Function & 1 Year Warranty – Chef-Mate KS 63",
+        "image": "fitnessapp/setup/images/recProd/p2img.jpg",
+        "product_price": "Rs. 699/-",
+        "product_link": "https://amzn.in/d/9Hl950C",
+        "product_description": "Deal of the day for Prime Members: HealthSense Weight Machine for Kitchen, Kitchen Food Weighing Scale for Health, Fitness, Home Baking & Cooking with Bright LCD, Touch Button, Tare Function & 1 Year Warranty – Chef-Mate KS 63"
+    },
+    {
+        "product_name": "beatXP Kitchen Scale Multipurpose Portable Electronic Digital Weighing Scale | Weight Machine With Back light LCD Display | White |10 kg | 2 Year Warranty",
+        "image": "fitnessapp/setup/images/recProd/p3img.jpg",
+        "product_price": "Rs. 329/-",
+        "product_link": "https://amzn.in/d/15sKHLB",
+        "product_description": "Deal of the day for Prime Members: beatXP Kitchen Scale Multipurpose Portable Electronic Digital Weighing Scale | Weight Machine With Back light LCD Display | White |10 kg | 2 Year Warranty"
+    },
+    {
+        "product_name": "MuscleBlaze Biozyme Performance Whey Protein | Clinically Tested 50% Higher Protein Absorption | Informed Choice UK, Labdoor USA Certified & US Patent Filed EAF® (Chocolate Hazelnut, 1 kg / 2.2 lb)",
+        "image": "fitnessapp/setup/images/recProd/p4img.jpg",
+        "product_price": "Rs. 2299/-",
+        "product_link": "https://amzn.in/d/67OaUa6",
+        "product_description": "Deal of the day: MuscleBlaze Biozyme Performance Whey Protein | Clinically Tested 50% Higher Protein Absorption | Informed Choice UK, Labdoor USA Certified & US Patent Filed EAF® (Chocolate Hazelnut, 1 kg / 2.2 lb)"
+    },
+    {
+        "product_name": "Optimum Nutrition (ON) Gold Standard 100% Whey (2 lbs/907 g) (Double Rich Chocolate) Protein Powder for Muscle Support & Recovery, Vegetarian - Primary Source Whey Isolate",
+        "image": "fitnessapp/setup/images/recProd/p5img.jpg",
+        "product_price": "Rs. 2899/-",
+        "product_link": "https://amzn.in/d/cGZJHbl",
+        "product_description": "Deal of the day for Prime Members: Optimum Nutrition (ON) Gold Standard 100% Whey (2 lbs/907 g) (Double Rich Chocolate) Protein Powder for Muscle Support & Recovery, Vegetarian - Primary Source Whey Isolate"
+    },
+    {
+        "product_name": "AS-IT-IS Nutrition ATOM Whey Protein 1kg | 27g protein | Isolate & Concentrate | Double Rich Chocolate | USA Labdoor Certified | With Digestive Enzymes for better absorption",
+        "image": "fitnessapp/setup/images/recProd/p6img.jpg",
+        "product_price": "Rs. 1766/-",
+        "product_link": "https://amzn.in/d/iZgs0A0",
+        "product_description": "Deal of the day: AS-IT-IS Nutrition ATOM Whey Protein 1kg | 27g protein | Isolate & Concentrate | Double Rich Chocolate | USA Labdoor Certified | With Digestive Enzymes for better absorption"
+    },
+    {
+        "product_name": "Wellcore - Pure Micronised Creatine Monohydrate Powder (100G, 33 Servings) Lab Tested | Unflavoured | Rapid Absorption | Enhanced Muscle Strength & Power | Fast Recovery | Increased Muscle Mass",
+        "image": "fitnessapp/setup/images/recProd/p7img.jpg",
+        "product_price": "Rs. 599/-",
+        "product_link": "https://amzn.in/d/5zskrGT",
+        "product_description": "Limited-time deal: Wellcore - Pure Micronised Creatine Monohydrate Powder (100G, 33 Servings) Lab Tested | Unflavoured | Rapid Absorption | Enhanced Muscle Strength & Power | Fast Recovery | Increased Muscle Mass"
+    }
+]
+
+    content = {'recData' : recData,}
+
+    return render(request,'fitnessapp/recproducts.html', content)
+
 def payWall(request):
 
     if request.method == 'POST':

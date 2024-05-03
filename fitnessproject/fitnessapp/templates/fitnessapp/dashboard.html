@@ -62,6 +62,14 @@
                 </div>
             </a>
 
+            <a href="{% url 'recproducts' %}">
+            <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
+                <img src="{% static 'fitnessapp\setup\images\store-img.png' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                    <div class="text-center font-bold text-xl mt-5">
+                        <i class="fa-solid fa-shop mr-2 text-green-600"></i>Recommend Products
+                    </div>
+                </div>
+            </a>
             
             <a href="{% url 'bmical' %}">
             <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
@@ -72,7 +80,7 @@
                 </div>
             </a>
 
-            <a href="{% url 'bfpcal' %}">
+            <a href="{% url 'bfpcal' %}" class="hidden">
             <div class="border p-4 rounded-md hover:bg-green-200 shadow-md">                
                 <img src="{% static 'fitnessapp\setup\images\bfp.jpeg' %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
                     <div class="text-center font-bold text-xl mt-5">

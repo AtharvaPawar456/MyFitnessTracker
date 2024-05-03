@@ -1,0 +1,42 @@
+{% extends 'fitnessapp/base.html' %} {% block title %}Fitness | Recommend Product{% endblock %}
+<div>{% block content %} {% load static %}</div>
+    
+    <div class="text-center text-4xl font-bold text-indigo-600 mb-4">Recommend Product</div>
+
+
+    <div class="mx-20 my-20">
+
+        <!-- Yoga -->
+        <div>
+            
+            <!-- Types : cards -->
+            <div class="grid grid-cols-4 gap-4">
+                
+                {% for item in recData %}
+
+                <a href="{{item.product_link}}" target="_blank" class="hover:bg-yellow-100">
+                    <div class="border p-4 rounded-md shadow-md h-full">                
+                        <img src="{% static item.image %}" class="h-60 mx-auto rounded-md shadow-md" alt="Logo" />
+                        
+                        <div class="text-md mt-5 p-1 rounded-md bg-yellow-300">{{ item.product_name | title }}</div>
+                        <div class="text-justify mt-4 text-sm "><b>Description:</b> <br>{{ item.product_description }}</div>
+
+                        <div class="text-justify mt-4">
+                            <div>
+                                <div class="text-xl font-bold">Price</div>
+                                <div class="border p-2 bg-yellow-100 text-sm my-2 rounded-md">-> {{ item.product_price }}</div>
+                                <!-- {% for food in item.benefits %} -->
+                                <!-- {% endfor %} -->
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+    </div>
+    
+{% endblock %}
